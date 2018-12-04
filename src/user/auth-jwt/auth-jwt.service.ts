@@ -1,7 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
-import { UserService } from '../user/user.service';
 import { JwtPayload } from './interface/jwt-payload.interface';
+import { UserService } from '../user.service';
 
 @Injectable()
 export class AuthJWTService {

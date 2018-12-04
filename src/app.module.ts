@@ -5,15 +5,11 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { LoggerMiddleware } from './shared/middleware/logger.middleware';
 import { UserModule } from './user/user.module';
-import { AuthModule } from './auth-bearer/auth.module';
-import { AuthJWTModule } from './auth-jwt/auth-jwt.module';
 
 @Module({
   imports: [
     ProductModule,
     UserModule,
-    // AuthModule,
-    AuthJWTModule,
   ],
   controllers: [AppController],
   providers: [AppService],
