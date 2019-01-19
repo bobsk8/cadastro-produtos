@@ -5,12 +5,12 @@ import { Observable, of } from 'rxjs';
 export class UserService {
     constructor() { }
 
-    findOneByToken(token): Observable<any> {
+    findOneByToken(token: any): Observable<any> {
         return of(true);
     }
 
-    findOneByEmail(email) {
-        return true;
+    findOneByEmail(email: any) {
+        return { name: 'Rodrigo ', email: 'user@email.com', login: true};;
     }
 
     findOneByEmailAndPass(login: any) {
