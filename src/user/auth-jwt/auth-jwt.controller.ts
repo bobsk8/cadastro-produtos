@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Req } from '@nestjs/common';
+import { Controller, Post, UseGuards, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthJWTService } from './auth-jwt.service';
 import { JwtAuthGuard } from '../guard/jwt-auth.guard';
@@ -7,20 +7,9 @@ import { JwtAuthGuard } from '../guard/jwt-auth.guard';
 export class AuthJwtController {
     constructor(private readonly authJWTService: AuthJWTService) { }
 
-    @Get('token')
-    async createToken(): Promise<any> {
-        return await this.authJWTService.signIn();
-    }
-
-    @Get('login')
+    @Post('login')
     async login(@Req() req): Promise<any> {
-        return await this.authJWTService.signIn();
-    }
-
-    @Get('data')
-    @UseGuards(JwtAuthGuard)
-    findAll(@Req() req) {
-        // This route is restricted by AuthGuard
-        // JWT strategy
+        let login = req.body;
+        return await this.authJWTService.signIn(login);
     }
 }

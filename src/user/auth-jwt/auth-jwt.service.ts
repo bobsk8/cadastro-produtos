@@ -8,25 +8,27 @@ export class AuthJWTService {
   constructor(
     private readonly usersService: UserService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
-  async signIn(): Promise<string> {
-    // In the real-world app you shouldn't expose this method publicly
-    // instead, return a token once you verify user credentials
-    const user: JwtPayload = { email: 'user@email.com' };
-    return this.jwtService.sign(user);
+  async signIn(login: any): Promise<any> {
+    let user = await this.validateUser(login);
+    
+    if (user.login) {
+      const userToken = await this.createToken(user.email);
+      user.token = userToken;
+      return user;
+    } else {
+      return Promise.resolve({ login: false });
+    }
   }
 
-  async createToken() {
-    const user: JwtPayload = { email: 'test@email.com' };
-    const accessToken = this.jwtService.sign(user);
-    return {
-        expiresIn: 3600,
-        accessToken,
-    };
-}
+  async createToken(email: string) {
+    const user: JwtPayload = { email };
+    const accessToken = await this.jwtService.sign(user);
+    return accessToken;    
+  }
 
-  async validateUser(payload: JwtPayload): Promise<any> {
-    return await this.usersService.findOneByEmail(payload.email);
+  async validateUser(payload: any): Promise<any> {
+    return await this.usersService.findOneByEmailAndPass(payload);
   }
 }
