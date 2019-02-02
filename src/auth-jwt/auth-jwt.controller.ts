@@ -1,8 +1,8 @@
 import { Controller, Post, Req, Get, UseGuards } from '@nestjs/common';
 import { AuthJWTService } from './auth-jwt.service';
+
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from 'src/user/user.service';
-import { async } from 'rxjs/internal/scheduler/async';
 
 @Controller('api/auth-jwt')
 export class AuthJwtController {
