@@ -5,14 +5,16 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { LoggerMiddleware } from './shared/middleware/logger.middleware';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth-jwt/auth.module';
 
 @Module({
   imports: [
     ProductModule,
-    UserModule,
+    AuthModule,
+    UserModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

@@ -6,13 +6,13 @@ export class AllExceptionFilter<T> implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
-    const status = exception.getStatus();
+    // const status = exception.getStatus();
     const message = exception.message.message;
 
     response
-      .status(status)
+      // .status(status)
       .json({
-        statusCode: status,
+        // statusCode: status,
         timestamp: new Date().toISOString(),
         path: request.url,
         type: message,

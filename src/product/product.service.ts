@@ -3,7 +3,7 @@ import { Product } from './interface/product.interface';
 
 @Injectable()
 export class ProductService {
-    private readonly products: Product[] = [];
+    private products: Product[] = [];
 
     create(product: Product) {
         this.products.push(product);
@@ -14,11 +14,17 @@ export class ProductService {
     }
 
     delete(id: number) {
-        return this.products.filter(product => product.id === id);
+        this.products = this.products.filter(product => product.id === id);
     }
 
     update(id: number, updateProductDto: Product) {
-        return updateProductDto;
+        this.products.forEach((product: any) => {
+            if (product.id == id) {
+                product.id = updateProductDto.id;                
+                product.name = updateProductDto.name;
+                product.price = updateProductDto.price;
+            }
+        });
     }
 
     findAll(): Product[] {

@@ -1,7 +1,8 @@
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
 import { JwtPayload } from './interface/jwt-payload.interface';
-import { UserService } from '../user.service';
+
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class AuthJWTService {
@@ -30,5 +31,9 @@ export class AuthJWTService {
 
   async validateUser(payload: any): Promise<any> {
     return await this.usersService.findOneByEmailAndPass(payload);
+  }
+
+  async validateToken(token: any): Promise<any> {    
+    return this.jwtService.decode(token);  
   }
 }
