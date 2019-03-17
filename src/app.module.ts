@@ -1,4 +1,5 @@
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,7 +12,8 @@ import { AuthModule } from './auth-jwt/auth.module';
   imports: [
     ProductModule,
     AuthModule,
-    UserModule
+    UserModule,
+    TypeOrmModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService]
